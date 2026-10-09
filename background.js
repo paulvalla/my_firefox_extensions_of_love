@@ -5,26 +5,9 @@ browser.runtime.onInstalled.addListener(() => {
   browser.action.setBadgeBackgroundColor({ color: "#777777" });
 });
 
-// Allowed hostnames and their subdomains
-const allowedHostnames = ["dcb.bank.in", "hdfc.bank.in", "sbi.bank.in"];
-
-function isAllowedUrl(urlString) {
-  if (!urlString) {
-    return false;
-  }
-  try {
-    const url = new URL(urlString);
-    return allowedHostnames.some(hostname =>
-      url.hostname === hostname || url.hostname.endsWith("." + hostname)
-    );
-  } catch (e) {
-    return false;
-  }
-}
-
 // Handle the extension icon click
 browser.action.onClicked.addListener(async (tab) => {
-  if (!tab.id || !isAllowedUrl(tab.url)) {
+  if (!tab.id) {
     return;
   }
 
@@ -59,10 +42,14 @@ browser.action.onClicked.addListener(async (tab) => {
       }
     } else {
       // Inject the content script for the first time
-      await browser.scripting.executeScript({
-        target: { tabId: tab.id },
-        files: ["content.js"]
-      });
+      try {
+        await browser.scripting.executeScript({
+          target: { tabId: tab.id },
+          files: ["content.js"]
+        });
+      } catch (e) {
+        console.error("Failed to inject script into tab:", e);
+      }
     }
   } else {
     // Turn OFF

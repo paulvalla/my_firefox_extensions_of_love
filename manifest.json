@@ -8,10 +8,6 @@
     "storage",
     "scripting"
   ],
-  "host_permissions": [
-    "*://*.dcb.bank.in/*",
-    "*://*.hdfc.bank.in/*"
-  ],
   "background": {
     "scripts": [
       "background.js"
