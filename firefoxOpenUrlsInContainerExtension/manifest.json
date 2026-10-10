@@ -32,5 +32,10 @@
     "32": "icons/icon.svg",
     "48": "icons/icon.svg",
     "128": "icons/icon.svg"
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "open-urls-in-container@yourdomain.local"
+    }
   }
 }
