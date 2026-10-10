@@ -112,31 +112,3 @@ browser.action.onClicked.addListener(async () => {
     console.error("Error launching Start My Day via toolbar action:", err);
   }
 });
-
-// Handle incoming runtime messages
-browser.runtime.onMessage.addListener((message) => {
-  if (message.action === "START_MY_DAY") {
-    return (async () => {
-      try {
-        const settings = await getSettings();
-        const result = await openAllRules(settings.rules, message.openInNewWindow ?? settings.openInNewWindow);
-        return { success: true, count: result.count };
-      } catch (err) {
-        console.error("Error launching Start My Day:", err);
-        return { success: false, error: err.message };
-      }
-    })();
-  }
-
-  if (message.action === "LAUNCH_RULE") {
-    return (async () => {
-      try {
-        await openRule(message.rule);
-        return { success: true };
-      } catch (err) {
-        console.error("Error launching single rule:", err);
-        return { success: false, error: err.message };
-      }
-    })();
-  }
-});

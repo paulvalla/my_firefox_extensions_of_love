@@ -149,13 +149,10 @@ async function openRule(rule, windowId = null) {
 
 // Open all active rules
 async function openAllRules(rules, openInNewWindow = false) {
-  const activeRules = (rules || []).filter(r => r.enabled !== false && r.url);
+  const activeRules = (rules || []).filter(r => r && r.enabled !== false && r.url && r.url.trim() !== "");
   if (activeRules.length === 0) return { count: 0 };
 
-  let targetWindowId = null;
-
   if (openInNewWindow) {
-    // Create new window with the first rule tab
     const firstRule = activeRules[0];
     let firstCookieStoreId = "firefox-default";
     try {
@@ -170,14 +167,12 @@ async function openAllRules(rules, openInNewWindow = false) {
     }
 
     const newWindow = await browser.windows.create(windowProps);
-    targetWindowId = newWindow.id;
+    const targetWindowId = newWindow.id;
 
-    // Open remaining rules in the new window
     for (let i = 1; i < activeRules.length; i++) {
       await openRule(activeRules[i], targetWindowId);
     }
   } else {
-    // Open in current window
     for (const rule of activeRules) {
       await openRule(rule);
     }
