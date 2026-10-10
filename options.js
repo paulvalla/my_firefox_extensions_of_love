@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!settings.rules || settings.rules.length === 0) {
       rulesListContainer.innerHTML = `
         <div class="empty-rules">
-          No container rules defined yet.<br>Click "➕ Add Rule" to map your first URL!
+          No container rules defined yet.<br>Click "➕ Add Rule" or right-click any page and select "Add this page to Start My Day"!
         </div>
       `;
       return;
@@ -144,12 +144,10 @@ document.addEventListener("DOMContentLoaded", () => {
         containerBadge.innerHTML = "";
 
         if (matched) {
-          // Read colorCode directly from Firefox container object if available, or convert color string
           const colorHex = matched.colorCode || getFirefoxContainerColorHex(matched.color);
           const hasCustomIcon = matched.icon && matched.icon !== "circle" && matched.iconUrl;
 
           if (hasCustomIcon) {
-            // Filled circle with native SVG icon from Firefox (container.iconUrl)
             containerBadge.className = "firefox-container-badge badge-solid";
             containerBadge.style.backgroundColor = colorHex;
             containerBadge.style.borderColor = "transparent";
@@ -159,12 +157,10 @@ document.addEventListener("DOMContentLoaded", () => {
             img.alt = matched.name;
             containerBadge.appendChild(img);
           } else {
-            // Ring outline for circle/no icon (Jessica, Maman, Cielle)
             containerBadge.className = "firefox-container-badge badge-outline";
             containerBadge.style.borderColor = colorHex;
           }
         } else {
-          // Default (No Container)
           containerBadge.className = "firefox-container-badge badge-outline";
           containerBadge.style.borderColor = "#808080";
           containerBadge.textContent = "🌐";
@@ -316,6 +312,15 @@ document.addEventListener("DOMContentLoaded", () => {
       importFileInput.value = "";
     });
   }
+
+  // Auto-refresh rules if settings change in storage
+  browser.storage.onChanged.addListener((changes) => {
+    if (changes.rules && changes.rules.newValue) {
+      settings.rules = changes.rules.newValue;
+      renderRules();
+      showToast("Rules updated!");
+    }
+  });
 
   // Initial load
   async function init() {

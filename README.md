@@ -12,6 +12,12 @@ This extension uses native Firefox Contextual Identities (Containers) to assign 
 
 ## How to Configure
 
-1. Right-click the extension icon in the toolbar (or right-click anywhere on a web page) and select **Configure Container URLs & Settings**.
-2. Add your URLs and select the target Firefox Container from the dropdown list (or select "Default (No Container)").
+1. Right-click the extension icon in the toolbar and select **Configure Container URLs & Settings**.
+2. Add or edit your URLs and select the target Firefox Container from the dropdown list (or select "Default (No Container)").
 3. Click **Save Settings**.
+
+## How to Add the Current Page
+
+1. Right-click anywhere on any active web page.
+2. Select **Add this page to Start My Day**.
+3. The extension captures the page URL and current tab container, appends a new rule, and opens the settings page with your new rule added at the end.
