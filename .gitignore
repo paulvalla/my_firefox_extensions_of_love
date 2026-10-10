@@ -1,0 +1,18 @@
+# OS / IDE
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Node / Dependencies
+node_modules/
+npm-debug.log*
+
+# Extension Build Artifacts
+*.zip
+*.xpi
+web-ext-artifacts/
+
+# Secrets & Environment
+.env
+*.pem
