@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Start Your Day - Extension Settings</title>
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <div class="page-container">
+    <!-- Top Header Navigation -->
+    <header class="navbar">
+      <div class="brand">
+        <div class="brand-icon">🚀</div>
+        <div>
+          <h1>Start Your Day</h1>
+          <p>Configure URLs & Container Mappings</p>
+        </div>
+      </div>
+      <div class="header-actions">
+        <button id="addRuleBtn" class="btn btn-secondary">➕ Add Rule</button>
+        <button id="exportBtn" class="btn btn-secondary">📤 Export</button>
+        <button id="importBtn" class="btn btn-secondary">📥 Import</button>
+        <button id="saveBtn" class="btn btn-primary">💾 Save Settings</button>
+      </div>
+    </header>
+
+    <!-- Hidden file input for import -->
+    <input type="file" id="importFileInput" accept=".json" style="display: none;">
+
+    <!-- Toast Notification Banner -->
+    <div id="toast" class="toast hidden"></div>
+
+    <!-- Main Content Area -->
+    <main class="content">
+      <!-- General Options -->
+      <section class="card">
+        <div class="card-header">
+          <h2>⚙️ Preferences</h2>
+        </div>
+        <div class="card-body">
+          <label class="toggle-control">
+            <input type="checkbox" id="openInNewWindowPref">
+            <span class="toggle-label">Always open tabs in a new Firefox window when launching</span>
+          </label>
+        </div>
+      </section>
+
+      <!-- Rules List Card -->
+      <section class="card">
+        <div class="card-header space-between">
+          <div>
+            <h2>📋 Container Rules</h2>
+            <p class="subtitle">Specify the URLs to open and select your Firefox Container from the dropdown.</p>
+          </div>
+          <button id="addRuleBtn2" class="btn btn-sm btn-secondary">➕ Add Rule</button>
+        </div>
+
+        <div class="card-body">
+          <div class="rules-table-header">
+            <div class="col-order">Order</div>
+            <div class="col-active">Active</div>
+            <div class="col-url">URL / Domain</div>
+            <div class="col-container">Target Container</div>
+            <div class="col-actions">Actions</div>
+          </div>
+
+          <div id="rulesList" class="rules-table-body">
+            <!-- Dynamically populated rules -->
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="utils.js"></script>
+  <script src="options.js"></script>
+</body>
+</html>

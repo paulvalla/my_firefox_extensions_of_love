@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Start Your Day</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Header -->
+    <header class="header">
+      <div class="brand">
+        <div class="logo-icon">🚀</div>
+        <div>
+          <h1 class="title">Start Your Day</h1>
+          <p class="subtitle">Container Launcher</p>
+        </div>
+      </div>
+      <button id="openSettingsBtn" class="icon-btn" title="Open Settings">⚙️</button>
+    </header>
+
+    <!-- Main Launch Action Card -->
+    <div class="hero-card">
+      <button id="startMyDayBtn" class="primary-launch-btn">
+        <span class="btn-icon">⚡</span>
+        <span id="launchBtnText">Start My Day</span>
+      </button>
+
+      <label class="checkbox-option">
+        <input type="checkbox" id="openInNewWindowToggle">
+        <span>Open all in a new window</span>
+      </label>
+    </div>
+
+    <!-- Status Message -->
+    <div id="statusToast" class="status-toast hidden"></div>
+
+    <!-- Rules Quick View -->
+    <div class="section-title-row">
+      <span>Configured Links</span>
+      <span id="linkCountBadge" class="count-badge">0</span>
+    </div>
+
+    <div id="rulesList" class="rules-list">
+      <!-- Dynamically populated rules -->
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <button id="manageRulesBtn" class="footer-link-btn">Configure URLs & Containers ⚙️</button>
+    </footer>
+  </div>
+
+  <script src="utils.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>
