@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Start Your Day - Container Launcher",
-  "version": "1.0.0",
+  "version": "1.0",
   "description": "One click button to open configurable URLs in different Firefox Containers to start your day.",
   "permissions": [
     "contextualIdentities",
