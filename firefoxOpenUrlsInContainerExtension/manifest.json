@@ -1,0 +1,33 @@
+{
+  "manifest_version": 3,
+  "name": "Start Your Day - Container Launcher",
+  "version": "1.0.0",
+  "description": "One click button to open configurable URLs in different Firefox Containers to start your day.",
+  "permissions": [
+    "contextualIdentities",
+    "tabs",
+    "cookies",
+    "storage",
+    "contextMenus"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "action": {
+    "default_icon": "icons/icon.svg",
+    "default_title": "Start Your Day (Click to launch all tabs)"
+  },
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  },
+  "background": {
+    "scripts": ["utils.js", "background.js"]
+  },
+  "icons": {
+    "16": "icons/icon.svg",
+    "32": "icons/icon.svg",
+    "48": "icons/icon.svg",
+    "128": "icons/icon.svg"
+  }
+}

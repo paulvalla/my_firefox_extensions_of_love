@@ -1,0 +1,13 @@
+{
+  "browser": true,
+  "devel": true,
+  "esversion": 8,
+  "globals": {
+    "browser": false,
+    "chrome": false
+  },
+  "undef": true,
+  "unused": true,
+  "eqeqeq": true,
+  "curly": true
+}
