@@ -1,0 +1,29 @@
+name: Test Artifact Attestation
+
+on:
+  push:
+    branches: [ "main" ]
+
+permissions:
+  contents: read
+  id-token: write
+  attestations: write
+
+jobs:
+  test-attestation:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Generate Random Artifact File
+        run: |
+          mkdir -p artifacts
+          echo "Attestation test: $(date) - $(uuidgen 2>/dev/null || od -An -N4 -tx /dev/urandom | tr -d ' ')" > artifacts/test-artifact.txt
+          echo "Generated artifact content:"
+          cat artifacts/test-artifact.txt
+
+      - name: Attest Artifact
+        uses: actions/attest@v4
+        with:
+          subject-path: 'artifacts/test-artifact.txt'
