@@ -93,7 +93,7 @@ document.addEventListener("DOMContentLoaded", () => {
       containerSelectContainer.style.alignItems = "center";
       containerSelectContainer.style.gap = "10px";
 
-      // Native Firefox Container Badge (filled circle + icon or outline ring)
+      // Native Firefox Container Badge
       const containerBadge = document.createElement("div");
       containerBadge.className = "firefox-container-badge";
 
@@ -134,7 +134,7 @@ document.addEventListener("DOMContentLoaded", () => {
         containerSelect.appendChild(customOpt);
       }
 
-      // Update Native Badge visual state (reads container.colorCode & container.iconUrl directly from Firefox)
+      // Update Native Badge visual state
       function updateContainerBadge() {
         const selectedName = containerSelect.value;
         const matched = existingFirefoxContainers.find(
@@ -178,7 +178,7 @@ document.addEventListener("DOMContentLoaded", () => {
       containerSelectContainer.appendChild(containerBadge);
       containerSelectContainer.appendChild(containerSelect);
 
-      // 5. Actions (Test & Delete)
+      // 5. Actions (Test, Clone, Delete)
       const actionsDiv = document.createElement("div");
       actionsDiv.className = "row-actions";
 
@@ -199,6 +199,12 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       });
 
+      const cloneBtn = document.createElement("button");
+      cloneBtn.className = "btn btn-sm btn-secondary";
+      cloneBtn.textContent = "📋 Clone";
+      cloneBtn.title = "Clone this rule and append to list";
+      cloneBtn.addEventListener("click", () => cloneRule(index));
+
       const deleteBtn = document.createElement("button");
       deleteBtn.className = "btn btn-sm btn-danger";
       deleteBtn.textContent = "🗑️";
@@ -206,6 +212,7 @@ document.addEventListener("DOMContentLoaded", () => {
       deleteBtn.addEventListener("click", () => deleteRule(index));
 
       actionsDiv.appendChild(testBtn);
+      actionsDiv.appendChild(cloneBtn);
       actionsDiv.appendChild(deleteBtn);
 
       // Append columns to row
@@ -227,6 +234,21 @@ document.addEventListener("DOMContentLoaded", () => {
     settings.rules[index] = settings.rules[target];
     settings.rules[target] = temp;
     renderRules();
+  }
+
+  // Clone Rule
+  function cloneRule(index) {
+    const original = settings.rules[index];
+    if (!original) return;
+    const cloned = {
+      id: Date.now().toString(),
+      enabled: original.enabled !== false,
+      url: original.url,
+      containerName: original.containerName
+    };
+    settings.rules.push(cloned);
+    renderRules();
+    showToast("Rule cloned!");
   }
 
   // Delete Rule
